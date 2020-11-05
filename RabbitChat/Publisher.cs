@@ -3,7 +3,7 @@ using System.Text;
 
 namespace RabbitChat
 {
-    public class Publisher
+    public class Publisher : IPublisher
     {
         public Publisher(string hostName, string userName, string password)
             {
@@ -13,7 +13,7 @@ namespace RabbitChat
             connectionFactory.Password = password;
             }
 
-        public void send(string queue, string data)
+        public void SendQueue(string queue, string data)
         {
             using (IConnection connection = new ConnectionFactory().CreateConnection())
             {
@@ -21,6 +21,22 @@ namespace RabbitChat
                 {
                     channel.QueueDeclare(queue, false, false, false, null);
                     channel.BasicPublish(string.Empty, queue, null, Encoding.UTF8.GetBytes(data));
+                }
+            }
+        }
+
+
+        public void SendExchange(string exchange, string routingKey, string message)
+        {
+            using (IConnection connection = new ConnectionFactory().CreateConnection())
+            {
+                using (IModel channel = connection.CreateModel())
+                {
+                    var body = Encoding.UTF8.GetBytes(message);
+                    channel.BasicPublish(exchange: exchange,
+                                         routingKey: routingKey,
+                                         basicProperties: null,
+                                         body: body);
                 }
             }
         }
