@@ -14,4 +14,8 @@
             return _rabbit.Send(queue);
         }
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> master

@@ -14,4 +14,8 @@
             _rabbit.Save(queue, data);
         }
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> master

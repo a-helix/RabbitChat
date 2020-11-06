@@ -1,4 +1,5 @@
 ﻿using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
 using System.Text;
 
 namespace RabbitChat
@@ -26,5 +27,21 @@ namespace RabbitChat
                 }
             }
         }
+
+        public void SendExchange(string exchange, string routingKey, string message)
+        {
+            using (IConnection connection = new ConnectionFactory().CreateConnection())
+            {
+                using (IModel channel = connection.CreateModel())
+                {
+                    var body = Encoding.UTF8.GetBytes(message);
+                    channel.BasicPublish(exchange: exchange,
+                                         routingKey: routingKey,
+                                         basicProperties: null,
+                                         body: body);
+                }
+            }
+        }
     }
 }
+ 

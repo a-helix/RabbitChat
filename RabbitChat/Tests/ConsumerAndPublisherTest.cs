@@ -10,7 +10,11 @@ namespace RabbitChat.Tests
                                    Directory.GetCurrentDirectory()).Parent.Parent.Parent.Parent.FullName,
                                    "WeatherAPI", "WeatherAPI", "Configs", "ApiConfigs.json");
         static readonly JsonFileContent config = new JsonFileContent(configPath);
+<<<<<<< HEAD
         static readonly string rabbitUrl = (string)config.Value("RabbitMQ");
+=======
+        static readonly string rabbitUrl = (string) config.Parameter("RabbitMQ");
+>>>>>>> master
         Consumer consumer = new Consumer(rabbitUrl, "test", "test");
         Publisher publisher = new Publisher(rabbitUrl, "test", "test");
 
@@ -24,5 +28,22 @@ namespace RabbitChat.Tests
             Assert.AreEqual(messege, positiveFeedback);
             Assert.IsNull(consumer.ReceiveQueue("not exhist"));
         }
+<<<<<<< HEAD
     }
 }
+=======
+
+        [Test]
+        public void SendAndReceiveExchangeMessegeTest()
+        {
+            var exchange = "Test";
+            var messege = "Hello World!";
+            var routingKey = (string)config.Parameter("routingKeyFinished");
+            publisher.SendExchange(exchange, routingKey, messege);
+            var positiveFeedback = consumer.ReceiveExchange(exchange, routingKey);
+            Assert.AreEqual(messege, positiveFeedback);
+            Assert.IsNull(consumer.ReceiveExchange(exchange, routingKey));
+        }
+    }
+}
+>>>>>>> master
