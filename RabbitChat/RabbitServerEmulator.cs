@@ -6,8 +6,7 @@ namespace RabbitChat
     public class RabbitServerEmulator
     {
         private static Dictionary<string, string> _users = new Dictionary<string, string>()
-
-        {
+        { 
             { "test", "test" }
         };
         private static Dictionary<string, string> _cache = new Dictionary<string, string>();

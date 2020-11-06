@@ -7,6 +7,7 @@ namespace RabbitChat
     public class Consumer : IConsumer
     {
         ConnectionFactory connectionFactory;
+
         public Consumer(string hostName, string userName, string password)
         {
             connectionFactory = new ConnectionFactory();

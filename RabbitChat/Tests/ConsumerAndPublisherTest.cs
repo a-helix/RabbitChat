@@ -11,6 +11,7 @@ namespace RabbitChat.Tests
                                    "WeatherAPI", "WeatherAPI", "Configs", "ApiConfigs.json");
         static readonly JsonFileContent config = new JsonFileContent(configPath);
         static readonly string rabbitUrl = (string)config.Value("RabbitMQ");
+
         Consumer consumer = new Consumer(rabbitUrl, "test", "test");
         Publisher publisher = new Publisher(rabbitUrl, "test", "test");
 
@@ -24,5 +25,7 @@ namespace RabbitChat.Tests
             Assert.AreEqual(messege, positiveFeedback);
             Assert.IsNull(consumer.ReceiveQueue("not exhist"));
         }
+
     }
 }
+
