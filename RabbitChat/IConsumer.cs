@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace RabbitChat
+﻿namespace RabbitChat
 {
-    interface IConsumer
+    public interface IConsumer
     {
+        public string ReceiveQueue(string queue);
     }
 }
