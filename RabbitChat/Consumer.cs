@@ -4,17 +4,19 @@ using RabbitMQ.Client.Events;
 
 namespace RabbitChat
 {
-    public class Consumer
+    public class Consumer : IConsumer
     {
+        ConnectionFactory connectionFactory;
+
         public Consumer(string hostName, string userName, string password)
         {
-            ConnectionFactory connectionFactory = new ConnectionFactory();
+            connectionFactory = new ConnectionFactory();
             connectionFactory.HostName = hostName;
             connectionFactory.UserName = userName;
             connectionFactory.Password = password;
         }
 
-        public string receive(string queue)
+        public string ReceiveQueue(string queue)
         {
             using (IConnection connection = new ConnectionFactory().CreateConnection())
             {

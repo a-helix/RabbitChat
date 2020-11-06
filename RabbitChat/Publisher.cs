@@ -1,19 +1,22 @@
 ﻿using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
 using System.Text;
 
 namespace RabbitChat
 {
-    public class Publisher
+    public class Publisher : IPublisher
     {
+        ConnectionFactory connectionFactory;
+
         public Publisher(string hostName, string userName, string password)
             {
-            ConnectionFactory connectionFactory = new ConnectionFactory();
+            connectionFactory = new ConnectionFactory();
             connectionFactory.HostName = hostName;
             connectionFactory.UserName = userName;
             connectionFactory.Password = password;
             }
 
-        public void send(string queue, string data)
+        public void SendQueue(string queue, string data)
         {
             using (IConnection connection = new ConnectionFactory().CreateConnection())
             {
@@ -26,3 +29,4 @@ namespace RabbitChat
         }
     }
 }
+ 
