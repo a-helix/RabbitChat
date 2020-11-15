@@ -18,7 +18,7 @@ namespace RabbitChat
 
         public string ReceiveQueue(string queue)
         {
-            using (IConnection connection = new ConnectionFactory().CreateConnection())
+            using (IConnection connection = connectionFactory.CreateConnection())
             {
                 using (IModel channel = connection.CreateModel())
                 {

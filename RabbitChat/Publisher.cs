@@ -18,7 +18,7 @@ namespace RabbitChat
 
         public void SendQueue(string queue, string data)
         {
-            using (IConnection connection = new ConnectionFactory().CreateConnection())
+            using (IConnection connection = connectionFactory.CreateConnection())
             {
                 using (IModel channel = connection.CreateModel())
                 {
